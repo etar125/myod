@@ -1,6 +1,6 @@
 #!/bin/bash
 
-commands="gcc ld git tar tinyramfs"
+commands="gcc g++ ld git tar tinyramfs make curl"
 
 function check {
     for com in $commands; do
@@ -27,7 +27,7 @@ function prepare {
     echo "NAME=\"MOLinux\"
 PRETTY_NAME=\"My Own Linux (Drywave)\"
 ID=mol
-BUILD_ID=drywave
+BUILD_ID=indev
 HOME_URL=\"https://github.com/etar125/\"
 DOCUMENTATION_URL=\"https://github.com/etar125/\"
 SUPPORT_URL=\"https://github.com/etar125/\"
@@ -41,7 +41,7 @@ function welcome {
     echo "      Welcome to..."
     echo "  MAKE YOUR OWN DISTRO"
     echo "      0.01_271224"
-    echo "       (Drywave)"
+    echo "       (indev)"
 }
 
 function kernel {
@@ -50,6 +50,13 @@ function kernel {
     echo "2) 5.15.176 LTS"
     echo "3) 6.12.6 *Latest"
     read knum
+    if [ $knum -eq 1 ]; then
+        kver="6.6.67"
+    elif [ $knum -eq 3 ]; then
+        kver="6.12.6"
+    else
+        kver="5.15.176"
+    fi
 }
 
 function core {
